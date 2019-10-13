@@ -15,13 +15,12 @@ class Switch extends Component{
   componentDidMount(){
     setInterval(()=>(
       this.setState(previousState=> (
-        {number:notelist[0],isShowingText:!previousState.isShowingText,daddy:!previousState.daddy}
+        {number:notelist[0],isShowingText:!previousState.isShowingText}
       ))
     ),1000);
   }
   notelist=[1,2,3]
-  state={number:0,isShowingText:true,
-  daddy:false};
+  state={number:0,isShowingText:true};
   render(){
 
     if(!this.state.isShowingText)
@@ -51,14 +50,13 @@ class NotePicker extends Component{
     ),1000);
         setInterval(()=>(
       this.setState(previousState=> (
-        {note:this.returnNoteIndex(previousState.noteList,previousState.noteIndex),isShowingText:!previousState.isShowingText,daddy:!previousState.daddy}
+        {note:this.returnNoteIndex(previousState.noteList,previousState.noteIndex),isShowingText:!previousState.isShowingText}
       ))
     ),1000);
 
   }
 
-  state={note:0,noteList:this.props.noteList,noteIndex:0,isShowingText:true,
-  daddy:false,continue:true};
+  state={note:0,noteList:this.props.noteList,noteIndex:0,isShowingText:true,continue:true};
   returnNoteIndex=(array1,index)=>{
     if (index+1<array1.length)
     {
