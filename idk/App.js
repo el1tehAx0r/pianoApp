@@ -1,8 +1,9 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import React, { Component } from 'react';
-import A from './ChordGameScreen.js';
+import ChordGameScreen from './ChordGameScreen.js';
 import {Button,StyleSheet, Text, View,Image,ImageBackground} from 'react-native';
+import ChordSelectionScreen from './ChordSelectionScreen.js';
 
 
 class HomeScreen extends React.Component {
@@ -21,8 +22,8 @@ class HomeScreen extends React.Component {
   }
 }
 const MainNavigator = createStackNavigator({
-  Home: {screen: HomeScreen},
- Game: {screen: A },
+  Home: {screen: ChordSelectionScreen},
+ Game: {screen: ChordGameScreen },
 });
 const App = createAppContainer(MainNavigator);
 export default App;
