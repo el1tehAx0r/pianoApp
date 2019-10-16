@@ -15,14 +15,15 @@ class HomeScreen extends React.Component {
     return (
       <Button
         title="Go to Jane's profile"
-        onPress={() => navigate('Game')}
+        onPress={() => navigate('ChordSelection')}
       />
 
     );
   }
 }
 const MainNavigator = createStackNavigator({
-  Home: {screen: ChordSelectionScreen},
+  Home: {screen: HomeScreen},
+  ChordSelection:{screen:ChordSelectionScreen},
  Game: {screen: ChordGameScreen },
 });
 const App = createAppContainer(MainNavigator);

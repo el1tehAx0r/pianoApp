@@ -2,36 +2,70 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import React, { Component } from 'react';
 import {ScrollView,Button,StyleSheet, Text, View,Image,ImageBackground,TouchableHighlight} from 'react-native';
-
+import ChordGameScreen from './ChordGameScreen.js'
 
 
 class NoteButton extends Component {
   constructor(props) {
     super(props)
-    this.state = {backgroundColor:'#DDDDDD', count: 0 }
-  }
+    this.state = {backgroundColor:'#DDDDDD', isPressed:false,makeComponent:false }
+    this.variable=props.chordType
+    this.title=props.title
 
+  }
+ getChordType=()=> {
+   return this.variable
+ }
+  isItemInArray=(array,item)=> {
+    for (var i = 0; i < array.length; i++) {
+        // This if statement depends on the format of your array
+        if (array[i][0] == item[0] && array[i][1] == item[1]) {
+            return i;   // Found it
+        }
+    }
+    return -1;   // Not found
+ }
+
+printTitle=()=>{console.log(this.title)}
   onPress = () => {
+  this.setState({makeComponent:true})
+    if (this.state.isPressed==false){
     this.setState({
+      isPressed:true,
     backgroundColor:'powderblue',
-      count: this.state.count+1
-    })
+      //count: this.state.count+1
+    },()=>{clickedNotes.push([this.variable,this.title]); console.log(clickedNotes);this.props.handleClick()})
+
+  }
+  else{
+    this.setState({
+      isPressed:false,
+    backgroundColor:'#DDDDDD',
+  },()=>{
+    var index=this.isItemInArray(clickedNotes,[this.variable,this.title])
+    if (index>-1){
+    clickedNotes.splice(index,1);
+console.log(clickedNotes);}
+  })
+  }
   }
 
  render() {
     return (
       <View style={styles.container}>
         <TouchableHighlight
-         style={styles.button,{backgroundColor:this.state.backgroundColor,margin:5}}
+         style={styles.button,{backgroundColor:this.state.backgroundColor,margin:3,marginVertical:-6}}
          onPress={this.onPress}
         >
          <Text>{this.props.title} </Text>
+
         </TouchableHighlight>
         <View style={[styles.countContainer]}>
           <Text style={[styles.countText]}>
             { this.state.count !== 0 ? this.state.count: null}
           </Text>
         </View>
+
       </View>
     )
   }
@@ -42,6 +76,8 @@ sharpNoteList=['A#','B#','C#','D#','E#','F#','G#'];
 noteList=['Ab','A','A#','Bb','B','B#','Cb','C','C#','Db','D','D#','Eb','E','E#','Fb','F','F#','Gb','G','G#'];
 chordTypes=['Major Triad','Major Triad First Inversion','Major Triad Second Inversion'];
 intervals=[[4,3],[6,4],[4,6]]
+clickedNotes=[]
+
 class Greeting extends Component {
   render() {
     return (
@@ -175,7 +211,8 @@ class NoteButtoan extends Button{
   onPress = () => {
      this.setState({
        isPressed: !this.state.isPressed,
-        backgroundColor: 'steelblue'
+        backgroundColor: 'steelblue',
+
      })
    }
 
@@ -186,9 +223,7 @@ class NoteButtoan extends Button{
 }
 class NoteButtons extends Component{
   render(){
-
-	var payments = [];
-
+  	var payments = [];
 	for(let i = 1; i < 3; i++){
 
 		payments.push(
@@ -196,24 +231,34 @@ class NoteButtons extends Component{
      <View key={i.toString()} style={styles.fixToText} >
 
   <NoteButton
+            handleClick={this.props.handleClick}
+            chordType={this.props.chordType}
             title={flatNoteList[2*i]}
           />
           <NoteButton
+  handleClick={this.props.handleClick}
+            chordType={this.props.chordType}
             title={naturalNoteList[2*i]}
           />
           <NoteButton
+  handleClick={this.props.handleClick}
+            chordType={this.props.chordType}
             title={sharpNoteList[2*i]}
           />
-
-
   <NoteButton
+handleClick={this.props.handleClick}
+    chordType={this.props.chordType}
             title={flatNoteList[2*i+1]}
           />
           <NoteButton
+handleClick={this.props.handleClick}
+            chordType={this.props.chordType}
             title={naturalNoteList[2*i+1]}
             onPress={() => Alert.alert('Left button pressed')}
           />
           <NoteButton
+handleClick={this.props.handleClick}
+            chordType={this.props.chordType}
             title={sharpNoteList[2*i+1]}
             onPress={() => Alert.alert('Right button pressed')}
           />
@@ -241,9 +286,15 @@ class NoteButtons extends Component{
             onPress={() => Alert.alert('Right button pressed')}
           />
           </View>*/
-export default class ChordGameScreen extends Component {
+export default class ChordSelectionScreen extends Component {
+  state={isClicked:false};
+  butters=true;
+  handleClick = () => {
+   butters=false;
+ console.log(butters)}
   render() {
 
+  const {navigate} = this.props.navigation;
     return (
 
      <View style={{flex: 1,
@@ -258,49 +309,54 @@ export default class ChordGameScreen extends Component {
   <Button
           title="Press me"
           color="#f194ff"
+
+  onPress={() => navigate('Game')}
           //onPress={() => Alert.alert('Button with adjusted color pressed')}
         />
              <Separator />
        </ScrollView>
       </View>
 
-  <View style={{flex:7, alignItems: 'center',flexDirection:'column'}}>
+  <View style={{flex:7, alignItems: 'stretch',flexDirection:'column'}}>
 <ScrollView>
   <Text>Major Triad</Text>
   <Separator/>
-  <NoteButtons/>
+  <NoteButtons handleClick={this.handleClick} chordType="Maj triad"/>
   <Text>Major Triad First Inversion</Text>
   <Separator/>
-  <NoteButtons/>
+  <NoteButtons handleClick={this.handleClick}  chordType="Maj Triad"/>
   <Text>Major Triad Second Inversion</Text>
   <Separator/>
-  <NoteButtons/>
+  <NoteButtons handleClick={this.handleClick} chordType="Maj triad" />
     <Text>Major Triad Second Inversion</Text>
   <Separator/>
-  <NoteButtons/>
+  <NoteButtons handleClick={this.handleClick} chordType="Maj triad"/>
     <Text>Major Triad Second Inversion</Text>
   <Separator/>
-  <NoteButtons/>
+  <NoteButtons handleClick={this.handleClick} chordType="Maj triad"/>
     <Text>Major Triad Second Inversion</Text>
   <Separator/>
-  <NoteButtons/>
+  <NoteButtons handleClick={this.handleClick} chordType="Maj triad"/>
     <Text>Major Triad Second Inversion</Text>
   <Separator/>
-  <NoteButtons/>
+  <NoteButtons handleClick={this.handleClick} chordType="Maj triad"/>
     <Text>Major Triad Second Inversion</Text>
   <Separator/>
-  <NoteButtons/>
+  <NoteButtons  handleClick={this.handleClick} chordType="Maj triad"/>
     <Text>Major Triad Second Inversion</Text>
   <Separator/>
-  <NoteButtons/>
+  <NoteButtons handleClick={this.handleClick} chordType="Maj triad"/>
 </ScrollView>
+
       </View>
       </View>
-
-
-
-         <Image style={{flex:2, height: undefined, width: undefined}}
- resizeMode='contain' source={require('./assets/blanksheet.jpg')}/>
+          {/*<Text style={{flex:1,alignItems:'center',flexDirection:'row'}}>
+Hellow
+</Text>*/}
+ <ScrollView style={{flex:2,  height: undefined, width: undefined}}>
+ </ScrollView>
+      {/*   <Image style={{flex:2, height: undefined, width: undefined}}
+ resizeMode='contain' source={require('./assets/blanksheet.jpg')}/>*/}
                   </View>
     );
   }
@@ -335,6 +391,11 @@ export default class LotsOfGreetings extends Component {
     );
   }
 }*/
+
+const MainNavigator = createStackNavigator({
+  ChordSelection:{screen:ChordSelectionScreen},
+ Game: {screen: ChordGameScreen },
+});
 const styles = StyleSheet.create({
   container: {
  flex: 1,
