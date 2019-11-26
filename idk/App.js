@@ -22,9 +22,10 @@ class HomeScreen extends React.Component {
   }
 }
 const MainNavigator = createStackNavigator({
-  Home: {screen: HomeScreen},
+
   ChordSelection:{screen:ChordSelectionScreen},
  Game: {screen: ChordGameScreen },
+  Home: {screen: HomeScreen},
 });
 const App = createAppContainer(MainNavigator);
 export default App;

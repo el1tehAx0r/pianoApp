@@ -11,6 +11,7 @@ class NoteButton extends Component {
     this.state = {backgroundColor:'#DDDDDD', isPressed:false,makeComponent:false }
     this.variable=props.chordType
     this.title=props.title
+    this.bassNumber=props.bassNumber
 
   }
  getChordType=()=> {
@@ -34,7 +35,7 @@ printTitle=()=>{console.log(this.title)}
       isPressed:true,
     backgroundColor:'powderblue',
       //count: this.state.count+1
-    },()=>{clickedNotes.push([this.variable,this.title]); console.log(clickedNotes);this.props.handleClick()})
+    },()=>{clickedNotes.push([this.variable,this.title,this.bassNumber]); console.log(clickedNotes);this.props.handleClick()})
 
   }
   else{
@@ -74,6 +75,7 @@ flatNoteList=['Ab','Bb','Cb','Db','Eb','Fb','Gb'];
 naturalNoteList=['A','B','C','D','E','F','G'];
 sharpNoteList=['A#','B#','C#','D#','E#','F#','G#'];
 noteList=['Ab','A','A#','Bb','B','B#','Cb','C','C#','Db','D','D#','Eb','E','E#','Fb','F','F#','Gb','G','G#'];
+bassNoteRange=['1,2,3,4,5,6']
 chordTypes=['Major Triad','Major Triad First Inversion','Major Triad Second Inversion'];
 intervals=[[4,3],[6,4],[4,6]]
 clickedNotes=[]
@@ -224,7 +226,7 @@ class NoteButtoan extends Button{
 class NoteButtons extends Component{
   render(){
   	var payments = [];
-	for(let i = 1; i < 3; i++){
+	for(let i = 0; i < 3; i++){
 
 		payments.push(
 
@@ -234,31 +236,37 @@ class NoteButtons extends Component{
             handleClick={this.props.handleClick}
             chordType={this.props.chordType}
             title={flatNoteList[2*i]}
+            bassNumber={4}
           />
           <NoteButton
   handleClick={this.props.handleClick}
             chordType={this.props.chordType}
             title={naturalNoteList[2*i]}
+            bassNumber={4}
           />
           <NoteButton
   handleClick={this.props.handleClick}
             chordType={this.props.chordType}
             title={sharpNoteList[2*i]}
+            bassNumber={4}
           />
   <NoteButton
 handleClick={this.props.handleClick}
     chordType={this.props.chordType}
             title={flatNoteList[2*i+1]}
+            bassNumber={4}
           />
           <NoteButton
 handleClick={this.props.handleClick}
             chordType={this.props.chordType}
             title={naturalNoteList[2*i+1]}
+            bassNumber={4}
             onPress={() => Alert.alert('Left button pressed')}
           />
           <NoteButton
 handleClick={this.props.handleClick}
             chordType={this.props.chordType}
+            bassNumber={4}
             title={sharpNoteList[2*i+1]}
             onPress={() => Alert.alert('Right button pressed')}
           />
@@ -309,8 +317,10 @@ export default class ChordSelectionScreen extends Component {
   <Button
           title="Press me"
           color="#f194ff"
-
-  onPress={() => navigate('Game')}
+onPress={() => {navigate('Game', {
+              chords: clickedNotes,
+            });
+          }}
           //onPress={() => Alert.alert('Button with adjusted color pressed')}
         />
              <Separator />
