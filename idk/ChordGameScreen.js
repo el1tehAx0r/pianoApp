@@ -17,21 +17,24 @@ class Switch extends Component{
   constructor(props) {
     super(props)
     this.chords=props.chords
+    this.chordlen=this.chords.length
     console.log(this.chords)
     console.log('henry')
+  }
+  componentWillUnMount(){
+
   }
   componentDidMount(){
     setInterval(()=>(
       this.setState(previousState=> (
-        {number:notelist[0],isShowingText:!previousState.isShowingText}
+        {chordNumber:Math.floor(Math.random()*this.chordlen)}
       ))
-    ),300000000);
+    ),3000);
   }
   notelist=[1,2,3]
-  state={number:0,isShowingText:true};
+  state={chordNumber:0,number:0,isShowingText:true};
 spaceMapping=()=>{
 }
-
 
 createNote=(currentChord)=>{
   var chordPositions=[]
@@ -196,8 +199,10 @@ posToBassPos=(note)=>{
     {
      var positionY=82.33-positions[i]*(5.03)/2;
      var positionX=45;
+     var positionXOperator=38
      var positionYString=positionY+'%'
      var positionXString=positionX+'%'
+    var positionXStringOperator=positionXOperator+'%'
    notesInChord.push(<Image
   style={{
     position:'absolute',
@@ -210,6 +215,39 @@ posToBassPos=(note)=>{
   resizeMode='cover'
   source={require('./assets/wholeNote.png')} resizeMode="cover">
   </Image>)
+  if (operators[i]=="#")
+  {
+
+   notesInChord.push(<Image
+  style={{
+    position:'absolute',
+    top:positionYString,
+    left:positionXStringOperator,
+    width: '8%',
+    height:'8%'
+  }}
+  key={i+"sharp"}
+  resizeMode='cover'
+  source={require('./assets/sharp.png')} resizeMode="cover">
+  </Image>)
+}
+
+if (operators[i]=="b")
+  {
+
+   notesInChord.push(<Image
+  style={{
+    position:'absolute',
+    top:positionYString,
+    left:positionXStringOperator,
+    width: '8%',
+    height:'8%'
+  }}
+  key={i+"flat"}
+  resizeMode='cover'
+  source={require('./assets/flat.png')} resizeMode="cover">
+  </Image>)
+}
     }
 chords.push(notesInChord);
   }
@@ -233,17 +271,39 @@ chords.push(notesInChord);
   source={require('./assets/wholeNote.png')} resizeMode="cover">
   </Image>)
 }*/}
-return chords
+
+return chords[this.state.chordNumber]
    }
   render(){
     //console.log(this.placeChords())
     const images=this.placeChords()
     if(!this.state.isShowingText)
     {
-      return null;
-    }
-    return (
+      return (
+    <ImageBackground
+  style={{
+    flex: 1,
+    alignSelf: 'stretch',
+    width: undefined,
+    height: undefined
+  }}
+  source={require('./assets/chordGameStaff.jpg')} resizeMode="cover">
+  <Image
+  style={{
+    position:'absolute',
+    top:'34.5%',
+    left:'50%',
+    width: '8%',
+    height:'8%'
+  }}
+  resizeMode='cover'
+  source={require('./assets/wholeNote.png')} resizeMode="cover">
+  </Image>
+  </ImageBackground>)
 
+    }
+    else{
+    return (
       <ImageBackground
   style={{
     flex: 1,
@@ -264,53 +324,9 @@ return chords
   resizeMode='cover'
   source={require('./assets/wholeNote.png')} resizeMode="cover">
   </Image>
-  {/*  <Image
-  style={{
-    position:'absolute',
-    top:'34.5%',
-    left:'50%',
-    width: '8%',
-    height:'8%'
-  }}
-  resizeMode='cover'
-  source={require('./assets/wholeNote.png')} resizeMode="cover">
-  </Image>
-  <Image
-  style={{
-    position:'absolute',
-    top:'57.18%',
-    left:'50%',
-    width: '8%',
-    height:'8%'
-  }}
-  resizeMode='cover'
-  source={require('./assets/wholeNote.png')} resizeMode="cover">
-  </Image>
-<Image
-  style={{
-    position:'absolute',
-    top:'17.2%',
-    left:'50%',
-    width: '8%',
-    height:'8%'
-  }}
-  resizeMode='cover'
-  source={require('./assets/wholeNote.png')} resizeMode="cover">
-  </Image>
-  <Image
-  style={{
-    position:'absolute',
-    top:'82.33%',
-    left:'50%',
-    width: '8%',
-    height:'8%'
-  }}
-  resizeMode='cover'
-  source={require('./assets/wholeNote.png')} resizeMode="cover">
-  </Image>*/}
   </ImageBackground>
 
-    );
+);}
   }
 }
 
