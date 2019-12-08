@@ -315,7 +315,7 @@ export default class ChordSelectionScreen extends Component {
 
   <ScrollView>
   <Button
-          title="Press me"
+          title="Play"
           color="#f194ff"
 onPress={() => {navigate('Game', {
               chords: clickedNotes,

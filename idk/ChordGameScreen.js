@@ -24,12 +24,20 @@ class Switch extends Component{
   componentWillUnMount(){
 
   }
-  componentDidMount(){
-    setInterval(()=>(
-      this.setState(previousState=> (
-        {chordNumber:Math.floor(Math.random()*this.chordlen)}
+setChordNumber=()=>{
+    var chordNum=this.state.chordNumber;
+    while(chordNum==this.state.chordNumber){
+  chordNum=(Math.floor(Math.random()*this.chordlen));
+    }
+
+  this.setState(previousState=> (
+        {chordNumber:chordNum,}
       ))
-    ),3000);
+}
+  componentDidMount(){
+    var secondTimer=setInterval(()=>(clearInterval(firstTimer)),3000);
+  var firstTimer=  setInterval(()=>(this.setChordNumber()
+    ),1000);
   }
   notelist=[1,2,3]
   state={chordNumber:0,number:0,isShowingText:true};
@@ -288,17 +296,6 @@ return chords[this.state.chordNumber]
     height: undefined
   }}
   source={require('./assets/chordGameStaff.jpg')} resizeMode="cover">
-  <Image
-  style={{
-    position:'absolute',
-    top:'34.5%',
-    left:'50%',
-    width: '8%',
-    height:'8%'
-  }}
-  resizeMode='cover'
-  source={require('./assets/wholeNote.png')} resizeMode="cover">
-  </Image>
   </ImageBackground>)
 
     }
@@ -313,17 +310,6 @@ return chords[this.state.chordNumber]
   }}
   source={require('./assets/chordGameStaff.jpg')} resizeMode="cover">
 {images}
-  <Image
-  style={{
-    position:'absolute',
-    top:'34.5%',
-    left:'50%',
-    width: '8%',
-    height:'8%'
-  }}
-  resizeMode='cover'
-  source={require('./assets/wholeNote.png')} resizeMode="cover">
-  </Image>
   </ImageBackground>
 
 );}
@@ -391,13 +377,13 @@ class ButtonBasics extends Component {
         <View style={styles.buttonContainer}>
           <Button
             onPress={this._onPressButton}
-            title="Press Me"
+            title="Play"
           />
         </View>
         <View style={styles.buttonContainer}>
           <Button
             onPress={this._onPressButton}
-            title="Press Me"
+            title="Play"
             color="#841584"
           />
         </View>
