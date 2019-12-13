@@ -1,10 +1,8 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import React, { Component } from 'react';
-import {ScrollView,Button,StyleSheet, Text, View,Image,ImageBackground,TouchableHighlight} from 'react-native';
+import {ScrollView,Button,StyleSheet,Picker, Text, View,Image,ImageBackground,TouchableHighlight} from 'react-native';
 import ChordGameScreen from './ChordGameScreen.js'
-
-
 class NoteButton extends Component {
   constructor(props) {
     super(props)
@@ -80,6 +78,8 @@ chordTypes=['Major Triad','Major Triad First Inversion','Major Triad Second Inve
 intervals=[[4,3],[6,4],[4,6]]
 clickedNotes=[]
 
+
+
 class Greeting extends Component {
   render() {
     return (
@@ -93,6 +93,7 @@ class Greeting extends Component {
 function Separator() {
   return <View style={styles.separator} />;
 }
+
 class Switch extends Component{
   componentDidMount(){
     setInterval(()=>(
@@ -295,11 +296,30 @@ handleClick={this.props.handleClick}
           />
           </View>*/
 export default class ChordSelectionScreen extends Component {
-  state={isClicked:false};
+  state={isClicked:false, timePerChord:0, totalTime:0,};
   butters=true;
   handleClick = () => {
    butters=false;
  console.log(butters)}
+selectTotalTime=()=>{
+  var listOfPickerItem=[]
+for(let i=0; i<12;i++)
+{
+var j=(30+(i*10)).toString();
+ listOfPickerItem.push(<Picker.Item key={j} label={j} value={j} />);
+}
+return listOfPickerItem;
+}
+selectTimePerChord=()=>
+{
+  var listOfPickerItem=[]
+  var tempList=[]
+for(let i=0; i<10;i++)
+{var j=(Math.floor((i*0.2)*100)/100).toString();
+ listOfPickerItem.push(<Picker.Item key={j} label={j} value={j}  />)
+}
+return listOfPickerItem
+}
   render() {
 
   const {navigate} = this.props.navigation;
@@ -309,22 +329,50 @@ export default class ChordSelectionScreen extends Component {
         flexDirection: 'column',
         alignItems: 'stretch'}}>
 
-  <View style={{flex:7, alignItems: 'stretch',flexDirection:'row'}}>
+  <View style={{flex:5, alignItems: 'stretch',flexDirection:'row'}}>
 
   <View style={{flex:3, backgroundColor:'aliceblue',flexDirection:'row'}}>
 
-  <ScrollView>
+  <View style={{flexDirection:"Column",flex:1}}>
   <Button
           title="Play"
           color="#f194ff"
 onPress={() => {navigate('Game', {
+              //timePerChord:this.state.timePerChord,
+              timePerChord:this.state.timePerChord,
+              totalTime:this.state.totalTime,
+            //  totalTime:this.state.totalTime,
               chords: clickedNotes,
             });
           }}
           //onPress={() => Alert.alert('Button with adjusted color pressed')}
         />
+
              <Separator />
-       </ScrollView>
+
+<View style={{flex:2}}>
+<Text style={{marginTop:60}}>seconds per note</Text>
+<Picker
+  selectedValue={this.state.timePerChord}
+  style={{marginTop:-80, flex: 1}}
+  onValueChange={(changedValue) =>
+    this.setState({timePerChord:changedValue})
+  }>
+{this.selectTimePerChord()}
+</Picker>
+</View>
+<View style={{flex:2}}>
+<Text style={{marginTop:60}}>total secs</Text>
+<Picker
+  selectedValue={this.state.totalTime}
+  style={{marginTop:-80, flex: 1}}
+  onValueChange={(changedValue) =>
+    this.setState({totalTime: changedValue})
+  }>
+  {this.selectTotalTime()}
+</Picker>
+</View>
+                   </View>
       </View>
 
   <View style={{flex:7, alignItems: 'stretch',flexDirection:'column'}}>
@@ -363,7 +411,7 @@ onPress={() => {navigate('Game', {
           {/*<Text style={{flex:1,alignItems:'center',flexDirection:'row'}}>
 Hellow
 </Text>*/}
- <ScrollView style={{flex:2,  height: undefined, width: undefined}}>
+ <ScrollView horizontal={true} style={{flex:2,  height: undefined, width: undefined}}>
  </ScrollView>
       {/*   <Image style={{flex:2, height: undefined, width: undefined}}
  resizeMode='contain' source={require('./assets/blanksheet.jpg')}/>*/}

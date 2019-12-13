@@ -20,9 +20,8 @@ class Switch extends Component{
     this.chordlen=this.chords.length
     console.log(this.chords)
     console.log('henry')
-  }
-  componentWillUnMount(){
-
+    var secondTimer
+    var firstTimer
   }
 setChordNumber=()=>{
     var chordNum=this.state.chordNumber;
@@ -34,10 +33,15 @@ setChordNumber=()=>{
         {chordNumber:chordNum,}
       ))
 }
+componentWillUnmount()
+{
+  clearInterval(secondTimer)
+  clearInterval(firstTimer)
+}
   componentDidMount(){
-    var secondTimer=setInterval(()=>(clearInterval(firstTimer)),3000);
-  var firstTimer=  setInterval(()=>(this.setChordNumber()
-    ),1000);
+    secondTimer=setInterval(()=>(clearInterval(firstTimer)),parseInt(this.props.totalTime*1000));
+  firstTimer=  setInterval(()=>(this.setChordNumber()
+),parseFloat(this.props.timePerChord*1000));
   }
   notelist=[1,2,3]
   state={chordNumber:0,number:0,isShowingText:true};
@@ -408,6 +412,9 @@ export default class ChordGameScreen extends Component {
   constructor(props) {
     super(props)
     //this.state = {}
+    console.log(this.props.navigation.getParam('timePerChord','default value'),"basterlajdklfjsldfj");
+
+    console.log(this.props.navigation.getParam('totalTime','default value'),"basterlajdklfjsldfj");
   }
   render() {
 //console.log(this.props.navigation.getParam('chords', 'default value'));
@@ -428,7 +435,8 @@ var chordList=this.props.navigation.getParam('chords','default value');
       </View>
       <View style={{flex:3, backgroundColor:'powderblue',alignItems: 'center'}}>
 
-        <Switch text='Yes blinking is so great' chords={chordList} />
+        <Switch text='Yes blinking is so great' chords={chordList} totalTime={this.props.navigation.getParam('totalTime','default value')}
+        timePerChord={this.props.navigation.getParam('timePerChord','default value')} />
 
 
       </View>
