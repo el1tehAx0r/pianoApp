@@ -2,6 +2,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import React, { Component } from 'react';
 import {ScrollView,Button,StyleSheet,Picker, Text, View,Image,ImageBackground,TouchableHighlight} from 'react-native';
+import CountdownCircle from 'react-native-countdown-circle';
 import ChordGameScreen from './ChordGameScreen.js'
 class NoteButton extends Component {
   constructor(props) {
@@ -10,7 +11,6 @@ class NoteButton extends Component {
     this.variable=props.chordType
     this.title=props.title
     this.bassNumber=props.bassNumber
-
   }
  getChordType=()=> {
    return this.variable

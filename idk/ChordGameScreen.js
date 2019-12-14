@@ -2,6 +2,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import React, { Component } from 'react';
 import {Button,StyleSheet, Text, View,Image,ImageBackground} from 'react-native';
+import CountdownCircle from 'react-native-countdown-circle';
 
 notelist=[1,2,3,4,5]
 class Greeting extends Component {
@@ -35,11 +36,11 @@ setChordNumber=()=>{
 }
 componentWillUnmount()
 {
-  clearInterval(secondTimer)
+  //clearInterval(secondTimer)
   clearInterval(firstTimer)
 }
   componentDidMount(){
-    secondTimer=setInterval(()=>(clearInterval(firstTimer)),parseInt(this.props.totalTime*1000));
+    //secondTimer=setInterval(()=>(clearInterval(firstTimer)),parseInt(this.props.totalTime*1000));
   firstTimer=  setInterval(()=>(this.setChordNumber()
 ),parseFloat(this.props.timePerChord*1000));
   }
@@ -441,8 +442,16 @@ var chordList=this.props.navigation.getParam('chords','default value');
 
       </View>
 
-  <View style={{flex:1, backgroundColor:'steelblue',alignItems: 'center'}}>
-
+  <View style={{flex:1, backgroundColor:'steelblue',alignItems: 'center', justifyContent:'center'}}>
+<CountdownCircle
+            seconds={parseInt(this.props.navigation.getParam('totalTime','default value'))}
+            radius={30}
+            borderWidth={8}
+            color="#ff003f"
+            bgColor="#fff"
+            textStyle={{ fontSize: 20 }}
+            onTimeElapsed={() => clearInterval(firstTimer)}
+        />
 
 
       </View>
