@@ -181,6 +181,9 @@ onPress={() => {navigate('Game', {
   <Text>Major Triad</Text>
   <Separator/>
   <NoteButtons chordType="Maj triad"/>
+  <Text>Minor Triad</Text>
+  <Separator/>
+  <NoteButtons chordType="Min triad"/>
   <Text>Major Triad First Inversion</Text>
   <Separator/>
 <Text>In Progress</Text>
