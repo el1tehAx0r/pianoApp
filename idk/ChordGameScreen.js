@@ -62,11 +62,10 @@ createNote=(currentChord)=>{
     var thirdNoteBassPos=this.posToBassPos(thirdNotePos)
     notePositions.unshift(thirdNotePos)
     noteOperator.unshift(this.addFlatorSharp(firstNote,firstNotePos,"unison"))
-    noteOperator.unshift(this.addFlatorSharp(firstNote,secondNotePos,"majorThird"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,secondNotePos,"minorThird"))
     noteOperator.unshift(this.addFlatorSharp(firstNote,thirdNotePos,"majorFifth"))
       }
-      return [notePositions,noteOperator]
-}
+
   if (currentChord[0]=="Maj triad")
   {
     var firstNote= currentChord[1]
@@ -83,6 +82,133 @@ createNote=(currentChord)=>{
     noteOperator.unshift(this.addFlatorSharp(firstNote,firstNotePos,"unison"))
     noteOperator.unshift(this.addFlatorSharp(firstNote,secondNotePos,"majorThird"))
     noteOperator.unshift(this.addFlatorSharp(firstNote,thirdNotePos,"majorFifth"))
+      }
+
+  if (currentChord[0]=="Maj triad first inv")
+  {
+    var firstNote= currentChord[1]
+    var firstNotePos=letterToPos[currentChord[1].substring(0,1)]
+    var firstNoteBassPos=this.posToBassPos(firstNotePos)
+    var secondNotePos=firstNotePos+2
+    var secondNoteBassPos=this.posToBassPos(secondNotePos)
+    var thirdNotePos=firstNotePos+4
+    var thirdNoteBassPos=this.posToBassPos(thirdNotePos)
+    var firstInvNotePos=letterToPos[currentChord[1].substring(0,1)]+7
+    var firstInvNoteBassPos=this.posToBassPos(firstInvNotePos)+7
+
+    notePositions.unshift(firstInvNotePos)
+
+    notePositions.unshift(secondNotePos)
+    notePositions.unshift(thirdNotePos)
+
+    noteOperator.unshift(this.addFlatorSharp(firstNote,firstNotePos,"unison"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,secondNotePos,"majorThird"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,thirdNotePos,"majorFifth"))
+      }
+        if (currentChord[0]=="Maj triad second inv")
+  {
+    var firstNote= currentChord[1]
+    var firstNotePos=letterToPos[currentChord[1].substring(0,1)]
+    var firstNoteBassPos=this.posToBassPos(firstNotePos)
+    var secondNotePos=firstNotePos+2
+    var secondNoteBassPos=this.posToBassPos(secondNotePos)
+    var thirdNotePos=firstNotePos+4
+    var thirdNoteBassPos=this.posToBassPos(thirdNotePos)
+    var firstInvNotePos=letterToPos[currentChord[1].substring(0,1)]+7
+    var firstInvNoteBassPos=this.posToBassPos(firstInvNotePos)+7
+    var secondInvNotePos=secondNotePos+7
+    var secondInvNoteBassPos=this.posToBassPos(secondInvNotePos)
+    notePositions.unshift(firstInvNotePos)
+    notePositions.unshift(secondInvNotePos)
+    notePositions.unshift(thirdNotePos)
+
+    noteOperator.unshift(this.addFlatorSharp(firstNote,firstNotePos,"unison"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,secondNotePos,"majorThird"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,thirdNotePos,"majorFifth"))
+      }
+  if (currentChord[0]=="Min triad first inv")
+  {
+    var firstNote= currentChord[1]
+    var firstNotePos=letterToPos[currentChord[1].substring(0,1)]
+    var firstNoteBassPos=this.posToBassPos(firstNotePos)
+    var secondNotePos=firstNotePos+2
+    var secondNoteBassPos=this.posToBassPos(secondNotePos)
+    var thirdNotePos=firstNotePos+4
+    var thirdNoteBassPos=this.posToBassPos(thirdNotePos)
+    var firstInvNotePos=letterToPos[currentChord[1].substring(0,1)]+7
+    var firstInvNoteBassPos=this.posToBassPos(firstInvNotePos)+7
+
+    notePositions.unshift(firstInvNotePos)
+    notePositions.unshift(secondNotePos)
+    notePositions.unshift(thirdNotePos)
+
+    noteOperator.unshift(this.addFlatorSharp(firstNote,firstNotePos,"unison"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,secondNotePos,"minorThird"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,thirdNotePos,"majorFifth"))
+      }
+        if (currentChord[0]=="Min triad second inv")
+  {
+    var firstNote= currentChord[1]
+    var firstNotePos=letterToPos[currentChord[1].substring(0,1)]
+    var firstNoteBassPos=this.posToBassPos(firstNotePos)
+    var secondNotePos=firstNotePos+2
+    var secondNoteBassPos=this.posToBassPos(secondNotePos)
+    var thirdNotePos=firstNotePos+4
+    var thirdNoteBassPos=this.posToBassPos(thirdNotePos)
+    var firstInvNotePos=letterToPos[currentChord[1].substring(0,1)]+7
+    var firstInvNoteBassPos=this.posToBassPos(firstInvNotePos)+7
+    var secondInvNotePos=secondNotePos+7
+    var secondInvNoteBassPos=this.posToBassPos(secondInvNotePos)
+    notePositions.unshift(firstInvNotePos)
+    notePositions.unshift(secondInvNotePos)
+    notePositions.unshift(thirdNotePos)
+
+    noteOperator.unshift(this.addFlatorSharp(firstNote,firstNotePos,"unison"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,secondNotePos,"minorThird"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,thirdNotePos,"majorFifth"))
+      }
+  if (currentChord[0]=="Maj seven")
+  {
+    var firstNote= currentChord[1]
+    var firstNotePos=letterToPos[currentChord[1].substring(0,1)]
+    console.log(firstNotePos)
+    notePositions.unshift(firstNotePos)
+    var firstNoteBassPos=this.posToBassPos(firstNotePos)
+    var secondNotePos=firstNotePos+2
+    var secondNoteBassPos=this.posToBassPos(secondNotePos)
+    notePositions.unshift(secondNotePos)
+    var thirdNotePos=firstNotePos+4
+    var thirdNoteBassPos=this.posToBassPos(thirdNotePos)
+    notePositions.unshift(thirdNotePos)
+    var fourthNotePos=firstNotePos+6
+    var fouthNoteBassPos=this.posToBassPos(fourthNotePos)
+    notePositions.unshift(fourthNotePos)
+    noteOperator.unshift(this.addFlatorSharp(firstNote,firstNotePos,"unison"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,secondNotePos,"majorThird"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,thirdNotePos,"majorFifth"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,fourthNotePos,"majorSeventh"))
+      }
+
+ if (currentChord[0]=="Min seven")
+  {
+    var firstNote= currentChord[1]
+    var firstNotePos=letterToPos[currentChord[1].substring(0,1)]
+    console.log(firstNotePos)
+    notePositions.unshift(firstNotePos)
+    var firstNoteBassPos=this.posToBassPos(firstNotePos)
+    var secondNotePos=firstNotePos+2
+    var secondNoteBassPos=this.posToBassPos(secondNotePos)
+    notePositions.unshift(secondNotePos)
+    var thirdNotePos=firstNotePos+4
+    var thirdNoteBassPos=this.posToBassPos(thirdNotePos)
+    notePositions.unshift(thirdNotePos)
+    var fourthNotePos=firstNotePos+6
+    var fouthNoteBassPos=this.posToBassPos(fourthNotePos)
+    notePositions.unshift(fourthNotePos)
+    noteOperator.unshift(this.addFlatorSharp(firstNote,firstNotePos,"unison"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,secondNotePos,"minorThird"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,thirdNotePos,"majorFifth"))
+    noteOperator.unshift(this.addFlatorSharp(firstNote,fourthNotePos,"domSeventh"))
       }
       return [notePositions,noteOperator]
 }
@@ -154,6 +280,23 @@ addFlatorSharp=(bassLetter,comparePosition,whatSpacing)=>
       return ""
       }
   }
+
+  else if (whatSpacing=="minorThird")
+  {
+    if(Math.abs(chromLetterToPos[bassLetter]-mapDiaToChrom[comparePosition])>1.5)
+      {
+        return "b"
+      }
+      else if (Math.abs(chromLetterToPos[bassLetter]-mapDiaToChrom[comparePosition])<1.5)
+      {
+        return "#"
+      }
+      else{
+        console.log("llolol")
+      return ""
+      }
+  }
+
   else if (whatSpacing=="majorFifth")
   {
     if(Math.abs(chromLetterToPos[bassLetter]-mapDiaToChrom[comparePosition])>3.5)
@@ -161,6 +304,37 @@ addFlatorSharp=(bassLetter,comparePosition,whatSpacing)=>
         return "b"
       }
       else if (Math.abs(chromLetterToPos[bassLetter]-mapDiaToChrom[comparePosition])<3.5)
+      {
+        return "#"
+      }
+      else{
+        console.log("llolol")
+      return ""
+      }
+  }
+    else if (whatSpacing=="majorSeventh")
+  {
+    if(Math.abs(chromLetterToPos[bassLetter]-mapDiaToChrom[comparePosition])>5.5)
+      {
+        return "b"
+      }
+      else if (Math.abs(chromLetterToPos[bassLetter]-mapDiaToChrom[comparePosition])<5.5)
+      {
+        return "#"
+      }
+      else{
+        console.log("llolol")
+      return ""
+      }
+  }
+
+    else if (whatSpacing=="domSeventh")
+  {
+    if(Math.abs(chromLetterToPos[bassLetter]-mapDiaToChrom[comparePosition])>5)
+      {
+        return "b"
+      }
+      else if (Math.abs(chromLetterToPos[bassLetter]-mapDiaToChrom[comparePosition])<5)
       {
         return "#"
       }

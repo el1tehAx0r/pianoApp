@@ -181,33 +181,30 @@ onPress={() => {navigate('Game', {
   <Text>Major Triad</Text>
   <Separator/>
   <NoteButtons chordType="Maj triad"/>
+  <Text>Major Triad</Text>
+  <Separator/>
+  <NoteButtons chordType="Maj triad"/>
   <Text>Minor Triad</Text>
   <Separator/>
   <NoteButtons chordType="Min triad"/>
-  <Text>Major Triad First Inversion</Text>
+  <Text>Maj Seventh</Text>
   <Separator/>
-<Text>In Progress</Text>
-  <Text>Major Triad Second Inversion</Text>
+  <NoteButtons chordType="Maj seven"/>
+  <Text>Min Seventh</Text>
   <Separator/>
-<Text>In Progress</Text>
-    <Text>Major Triad Second Inversion</Text>
+  <NoteButtons chordType="Min seven"/>
+  <Text>Major triad first inversion</Text>
   <Separator/>
-<Text>In Progress</Text>
-    <Text>Major Triad Second Inversion</Text>
+  <NoteButtons chordType="Maj triad first inv"/>
+  <Text>Major triad second inversion</Text>
   <Separator/>
-<Text>In Progress</Text>
-    <Text>Major Triad Second Inversion</Text>
+  <NoteButtons chordType="Maj triad second inv"/>
+  <Text>Minor triad first inversion</Text>
   <Separator/>
-<Text>In Progress</Text>
-    <Text>Major Triad Second Inversion</Text>
+  <NoteButtons chordType="Min triad first inv"/>
+  <Text>Minor triad second inversion</Text>
   <Separator/>
-<Text>In Progress</Text>
-    <Text>Major Triad Second Inversion</Text>
-  <Separator/>
-<Text>In Progress</Text>
-    <Text>Major Triad Second Inversion</Text>
-  <Separator/>
-<Text>In Progress</Text>
+  <NoteButtons chordType="Min triad second inv"/>
 </ScrollView>
 
       </View>
