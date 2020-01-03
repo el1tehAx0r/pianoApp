@@ -13,7 +13,7 @@ export default class ChordGameSettingScreen extends Component {
    static navigationOptions = ({navigation}) => {
         const {params = {}} = navigation.state;
         return {
-            headerRight: <Button
+            headerLeft: <Button
                              title="Refresh"
                              onPress={() => {console.log(navigation.state.params.timePerChord);navigation.navigate('ChordSelection', {totalTime: navigation.state.params.totalTime,timePerChord:navigation.state.params.timePerChord
               });
@@ -51,8 +51,8 @@ return listOfPickerItem
 <Text>seconds per chord</Text>
 <RNPickerSelect
 placeholder={
-    {label: 'a',
-    value: this.props.timePerChord}
+    {label: this.props.navigation.state.params.timePerChord.toString(),
+    value: this.props.navigation.state.params.timePerChord}
 }
   selectedValue={this.props.timePerChord}
   onValueChange={(changedValue) =>
@@ -65,8 +65,8 @@ items={this.selectTimePerChord()}
 <Text>TotalTime</Text>
 <RNPickerSelect
 placeholder={{
-    label: 'aa',
-    value: this.props.totalTime
+    label:this.props.navigation.state.params.totalTime.toString(),
+    value: this.props.navigation.state.params.totalTime
 }}
   selectedValue={this.props.totalTime}
   onValueChange={(changedValue) =>
