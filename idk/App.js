@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import ChordGameScreen from './ChordGameScreen.js';
 import {Button,StyleSheet, Text, View,Image,ImageBackground} from 'react-native';
 import ChordSelectionScreen from './ChordSelectionScreen.js';
+import ChordGameSettingScreen from'./ChordGameSettingScreen.js';
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -33,6 +34,9 @@ const MainNavigator = createStackNavigator({
   Home: {
     screen: HomeScreen
   },
+  Setting:{
+    screen:ChordGameSettingScreen
+  }
 });
 const App = createAppContainer(MainNavigator);
 export default App;

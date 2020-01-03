@@ -1,9 +1,11 @@
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import React, { Component } from 'react';
-import {ScrollView,Button,StyleSheet,Picker, Text, View,Image,ImageBackground,TouchableHighlight} from 'react-native';
+import {ScrollView,StyleSheet,Picker, Text, View,Image,ImageBackground,TouchableHighlight} from 'react-native';
+import { Button } from 'react-native-elements';
 import CountdownCircle from 'react-native-countdown-circle';
-import ChordGameScreen from './ChordGameScreen.js'
+import ChordGameScreen from './ChordGameScreen.js';
+import ChordGameSettingScreen from './ChordGameSettingScreen.js';
 flatNoteList=['Ab','Bb','Cb','Db','Eb','Fb','Gb'];
 naturalNoteList=['A','B','C','D','E','F','G'];
 sharpNoteList=['A#','B#','C#','D#','E#','F#','G#'];
@@ -50,7 +52,7 @@ console.log(clickedNotes);}
     return (
       <View style={styles.container}>
         <TouchableHighlight
-         style={styles.button,{backgroundColor:this.state.backgroundColor,margin:3,marginVertical:-6}}
+         style={styles.button,{paddingVertical:7,backgroundColor:this.state.backgroundColor,margin:3,marginVertical:-6}}
          onPress={this.onPress}
         >
          <Text>{this.props.title} </Text>
@@ -114,8 +116,8 @@ class NoteButtons extends Component{
 export default class ChordSelectionScreen extends Component {
   state = {
     isClicked: false,
-    timePerChord: 0.2,
-    totalTime: 30,
+    timePerChord: 1,
+    totalTime: 60,
   };
   selectTotalTime = () => {
       var listOfPickerItem = []
@@ -134,27 +136,43 @@ return listOfPickerItem
 }
 render() {
     const { navigate} = this.props.navigation;
+    const { navigation } = this.props;
+
     return (
      <View style={{flex: 1,
         flexDirection: 'column',
         alignItems: 'stretch'}}>
   <View style={{flex:5, alignItems: 'stretch',flexDirection:'row'}}>
   <View style={{flex:3, backgroundColor:'aliceblue',flexDirection:'row'}}>
-  <View style={{flexDirection:"Column",flex:1}}>
+  <View style={{flexDirection:"column",flex:1}}>
+  <Button
+          title="Setting"
+          color="#f194ff"
+onPress={() => {navigate('Setting', {totalTime:navigation.getParam('totalTime',60),timePerChord:navigation.getParam('timePerChord',1)
+              });
+          }}
+        />
+
   <Button
           title="Play"
           color="#f194ff"
-onPress={() => {navigate('Game', {
-              timePerChord:this.state.timePerChord,
-              totalTime:this.state.totalTime,
-              chords: clickedNotes,
-            });
-          }}
+onPress={() => {console.log(
+  navigation.getParam('timePerChord',1)
+)
+console.log(
+ navigation.getParam('totalTime',60)
+)
+}
+//  {navigate('Game', {
+ //             timePerChord:(this.props.timePerChord ==undefined) ? this.state.timePerChord :this.props.timePerChord,
+ //              totalTime:(this.props.totalTime==undefined)? this.state.totalTime: this.props.totalTime,
+  //            chords: clickedNotes,
+          //  });}
+          }
         />
-             <Separator />
 <View style={{flex:2}}>
 <Text style={{marginTop:60}}>seconds per note</Text>
-<Picker
+{/*<Picker
   selectedValue={this.state.timePerChord}
   style={{marginTop:-80, flex: 1}}
   onValueChange={(changedValue) =>
@@ -172,7 +190,7 @@ onPress={() => {navigate('Game', {
     this.setState({totalTime: changedValue})
   }>
   {this.selectTotalTime()}
-</Picker>
+</Picker>*/}
 </View>
                    </View>
       </View>
@@ -215,14 +233,17 @@ onPress={() => {navigate('Game', {
     );
   }
 }
-const MainNavigator = createStackNavigator({
+{/*const MainNavigator = createStackNavigator({
   ChordSelection: {
     screen: ChordSelectionScreen
   },
   Game: {
     screen: ChordGameScreen
   },
-});
+  Setting: {
+    screen:ChordGameSettingScreen
+  },
+});*/}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

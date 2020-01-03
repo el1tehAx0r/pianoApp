@@ -1,0 +1,25 @@
+
+      <View style= {{flexDirection:'row', alignItems:'stretch'}} >
+<View style ={{flex:1,flexDirection:'column', alignItems:'stretch'}}>
+<Text>seconds per note</Text>
+<RNPickerSelect
+placeHolder={30}
+  selectedValue={this.state.timePerChord}
+  onValueChange={(changedValue) =>
+    this.setState({timePerChord:changedValue})
+  }
+items={this.selectTimePerChord()}
+  />
+  </View>
+<View style ={{flex:1,flexDirection:'column', alignItems:'stretch'}}>
+
+<Text>seconds per note</Text>
+<RNPickerSelect
+placeHolder={1}
+  selectedValue={this.state.timePerChord}
+  onValueChange={(changedValue) =>
+    this.setState({timePerChord:changedValue})
+  }
+items={this.selectTotalTime()}
+  />
+</View>
